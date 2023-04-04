@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+    public:
+        int value;
+        Node* next;
+        
+        Node(int val) {
+            value = val;
+            next = nullptr;
+        }
+};
+
+class Stack {
+    private:
+        Node* head;
+    public:
+        Stack() {
+            head = nullptr;
+        }
+
+        void push(int x) {
+            Node* new_node = new Node(x);
+            new_node->next = head;
+            head = new_node;
+        }
+
+        int pop() {
+            if (is_empty()) {
+                cout << "Stack is empty" << endl;
+                return -1;
+            } else {
+                int item = head->value;
+                Node* temp = head;
+                head = head->next;
+                delete temp;
+                return item;
+            }
+        }
+
+        bool is_empty() {
+            return head == nullptr;
+        }
+
+        int peek() {
+            if (is_empty()) {
+                cout << "Stack is empty" << endl;
+                return -1;
+            } else {
+                return head->value;
+            }
+        }
+
+        int size() {
+            int count = 0;
+            Node* curr = head;
+            while (curr != nullptr) {
+                count++;
+                curr = curr->next;
+            }
+            return count;
+        }
+};
