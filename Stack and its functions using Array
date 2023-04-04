@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+class Stack {
+    private:
+        int* arr;
+        int top;
+        int capacity;
+    public:
+        Stack(int size) {
+            arr = new int[size];
+            capacity = size;
+            top = -1;
+        }
+
+        ~Stack() {
+            delete[] arr;
+        }
+
+        void push(int x) {
+            if (is_full()) {
+                cout << "Stack is full" << endl;
+            } else {
+                top++;
+                arr[top] = x;
+            }
+        }
+
+        int pop() {
+            if (is_empty()) {
+                cout << "Stack is empty" << endl;
+                return -1;
+            } else {
+                int item = arr[top];
+                top--;
+                return item;
+            }
+        }
+
+        bool is_empty() {
+            return top == -1;
+        }
+
+        bool is_full() {
+            return top == capacity - 1;
+        }
+
+        int peek() {
+            if (is_empty()) {
+                cout << "Stack is empty" << endl;
+                return -1;
+            } else {
+                return arr[top];
+            }
+        }
+
+        int size() {
+            return top + 1;
+        }
+}
